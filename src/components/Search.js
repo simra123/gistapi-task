@@ -1,17 +1,58 @@
-import React from 'react'
-import styled from 'styled-components'
-import Octicon from 'react-octicon'
+import React, { useState, useCallback } from "react";
+import styled from "styled-components";
+import Octicon from "react-octicon";
+import { getGistForUser } from "../services/gistService";
+import { debounce } from "lodash";
+const Search = ({
+  setGistForUser,
+  setIsLoading,
+  setSearchValue,
+  setIsError,
+}) => {
+  const onChangeHandler = useCallback(
+    debounce((val) => {
+      const getInput = val.target.value;
+      if (getInput) {
+        setIsLoading(true);
+        setSearchValue(getInput);
 
-const Search = () => {
+        getGistForUser(getInput)
+          .then((gistUsers) => {
+            // Handle the response here
+            console.log(gistUsers);
+            if (gistUsers?.length) {
+              setGistForUser(gistUsers);
+              setIsError(false);
+            } else {
+              setIsError(true);
+            }
+            setIsLoading(false);
+          })
+          .catch((error) => {
+            // Handle any errors that occurred during the API request
+            console.log(error.response.data?.message);
+            setIsLoading(false);
+            setIsError(true);
+          });
+      } else {
+        setSearchValue(null);
+      }
+    }, 500),
+    [],
+  );
+
   return (
     <Wrapper>
       <InputBox>
-      <Octicon name="search" />
-      <Input placeholder="Search Gists for the username"/>
+        <Octicon name="search" />
+        <Input
+          onChange={(e) => onChangeHandler(e)}
+          placeholder="Search Gists for the username"
+        />
       </InputBox>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   padding: 8px;
@@ -33,9 +74,9 @@ const Input = styled.input`
   width: 100%;
   font-size: 16px;
 
-  &:focus{
+  &:focus {
     outline: 0;
   }
 `;
 
-export default Search
+export default Search;

@@ -1,0 +1,47 @@
+{
+  "url": "https://api.github.com/gists/a4cad98496e2d7bdc4f6844450c5148a",
+  "forks_url": "https://api.github.com/gists/a4cad98496e2d7bdc4f6844450c5148a/forks",
+  "commits_url": "https://api.github.com/gists/a4cad98496e2d7bdc4f6844450c5148a/commits",
+  "id": "a4cad98496e2d7bdc4f6844450c5148a",
+  "node_id": "G_kwDOALhK3toAIGE0Y2FkOTg0OTZlMmQ3YmRjNGY2ODQ0NDUwYzUxNDhh",
+  "git_pull_url": "https://gist.github.com/a4cad98496e2d7bdc4f6844450c5148a.git",
+  "git_push_url": "https://gist.github.com/a4cad98496e2d7bdc4f6844450c5148a.git",
+  "html_url": "https://gist.github.com/yclin1209/a4cad98496e2d7bdc4f6844450c5148a",
+  "files": {
+    "hr-counter.c": {
+      "filename": "hr-counter.c",
+      "type": "text/plain",
+      "language": "C",
+      "raw_url": "https://gist.githubusercontent.com/yclin1209/a4cad98496e2d7bdc4f6844450c5148a/raw/70281e3ee79fb1e4a1e37dcbe208259250c1fbf2/hr-counter.c",
+      "size": 3185
+    }
+  },
+  "public": true,
+  "created_at": "2023-06-01T05:03:18Z",
+  "updated_at": "2023-06-01T05:03:18Z",
+  "description": "hr-counter.c",
+  "comments": 0,
+  "user": null,
+  "comments_url": "https://api.github.com/gists/a4cad98496e2d7bdc4f6844450c5148a/comments",
+  "owner": {
+    "login": "yclin1209",
+    "id": 12077790,
+    "node_id": "MDQ6VXNlcjEyMDc3Nzkw",
+    "avatar_url": "https://avatars.githubusercontent.com/u/12077790?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/yclin1209",
+    "html_url": "https://github.com/yclin1209",
+    "followers_url": "https://api.github.com/users/yclin1209/followers",
+    "following_url": "https://api.github.com/users/yclin1209/following{/other_user}",
+    "gists_url": "https://api.github.com/users/yclin1209/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/yclin1209/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/yclin1209/subscriptions",
+    "organizations_url": "https://api.github.com/users/yclin1209/orgs",
+    "repos_url": "https://api.github.com/users/yclin1209/repos",
+    "events_url": "https://api.github.com/users/yclin1209/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/yclin1209/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "truncated": false
+}
