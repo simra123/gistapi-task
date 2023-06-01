@@ -1,45 +1,47 @@
-import React, { useState, useCallback } from "react";
-import styled from "styled-components";
-import Octicon from "react-octicon";
-import { getGistForUser } from "../services/gistService";
-import { debounce } from "lodash";
+import React, { useCallback } from "react"
+import styled from "styled-components"
+import Octicon from "react-octicon"
+import { getGistForUser } from "../services/gistService"
+import { debounce } from "lodash"
+
+//props
 const Search = ({
   setGistForUser,
   setIsLoading,
   setSearchValue,
-  setIsError,
+  setIsError
 }) => {
+  //input handler memoized
   const onChangeHandler = useCallback(
+    //delays till user is done typing to avoid unneccesary api calls
     debounce((val) => {
-      const getInput = val.target.value;
+      const getInput = val.target.value
       if (getInput) {
-        setIsLoading(true);
-        setSearchValue(getInput);
+        setIsLoading(true)
+        setSearchValue(getInput)
 
         getGistForUser(getInput)
           .then((gistUsers) => {
             // Handle the response here
-            console.log(gistUsers);
             if (gistUsers?.length) {
-              setGistForUser(gistUsers);
-              setIsError(false);
+              setGistForUser(gistUsers)
+              setIsError(false)
             } else {
-              setIsError(true);
+              setIsError(true)
             }
-            setIsLoading(false);
+            setIsLoading(false)
           })
           .catch((error) => {
             // Handle any errors that occurred during the API request
-            console.log(error.response.data?.message);
-            setIsLoading(false);
-            setIsError(true);
-          });
+            setIsLoading(false)
+            setIsError(true)
+          })
       } else {
-        setSearchValue(null);
+        setSearchValue(null)
       }
     }, 500),
-    [],
-  );
+    []
+  )
 
   return (
     <Wrapper>
@@ -51,8 +53,8 @@ const Search = ({
         />
       </InputBox>
     </Wrapper>
-  );
-};
+  )
+}
 
 const Wrapper = styled.div`
   padding: 8px;
@@ -61,13 +63,13 @@ const Wrapper = styled.div`
   line-height: 1.5;
   border-radius: 6px;
   margin: 0 16px;
-`;
+`
 
 const InputBox = styled.div`
   border-radius: 4px;
   display: flex;
   width: 400px;
-`;
+`
 
 const Input = styled.input`
   border: none;
@@ -77,6 +79,6 @@ const Input = styled.input`
   &:focus {
     outline: 0;
   }
-`;
+`
 
-export default Search;
+export default Search

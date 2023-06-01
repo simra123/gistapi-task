@@ -1,17 +1,18 @@
-import React, { useCallback, useEffect, useState } from "react";
-import { getPublicGists } from "../services/gistService";
+import React, { useCallback, useEffect, useState } from "react"
+import { getPublicGists } from "../services/gistService"
 
 import {
   FaCodeBranch,
   FaRegStar,
   FaCode,
   FaRegCommentDots,
-  FaRegFileAlt,
-} from "react-icons/fa";
-import moment from "moment/moment";
-import Loader from "./loader";
-import NotFound from "./NotFound";
+  FaRegFileAlt
+} from "react-icons/fa"
+import moment from "moment/moment"
+import Loader from "./loader"
+import NotFound from "./NotFound"
 
+//props
 const GistList = ({
   gistUsers,
   setGistUsers,
@@ -19,58 +20,73 @@ const GistList = ({
   isLoading,
   searchValue,
   isError,
-  setIsError,
+  setIsError
 }) => {
-  const [prevData, setPrevData] = useState([]);
-  const getGist = useCallback(() => {
-    setIsLoading(true);
+  //keeping the copy of first rendered api
+  const [prevData, setPrevData] = useState([])
 
+  //memoized function
+  const getGist = useCallback(() => {
+    setIsLoading(true)
     getPublicGists()
       .then((publicGists) => {
-        // Handle the response here
-        setGistUsers(publicGists);
-        setPrevData(publicGists);
-        setIsLoading(false);
+        setGistUsers(publicGists)
+        setPrevData(publicGists)
+        //setting the loader to hide
+        setIsLoading(false)
       })
       .catch((error) => {
-        // Handle any errors that occurred during the API request
-        console.error(error);
-        setIsLoading(false);
-      });
-  }, []);
+        console.error(error)
+        //setting the loader to hide
+        setIsLoading(false)
+      })
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   useEffect(
     () => {
       //getting the list data on first render
+      //search value onchange will not affect getgist perfomance
+      getGist()
+
+      //check if input is clear and retrun the prev stored data
       if (!searchValue) {
-        setGistUsers(prevData);
-        setIsError(false);
-        console.log(prevData, "precvvvvvvvvvvvv");
+        setGistUsers(prevData)
+        setIsError(false)
       }
-      console.log(searchValue, "search");
-      getGist();
     },
     // dependency array to avoid unessessary rerenders
-    [searchValue],
-  );
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [searchValue]
+  )
+
+  //separate component to render multi file objects in loop
   const renderGistProperties = (gistObject) => {
-    const gistElements = [];
+    const gistElements = []
 
-    for (const [key, value] of Object.entries(gistObject)) {
-      const gist = value;
-      gistElements.push(
-        <p key={key}>
-          <FaRegFileAlt size="20" /> {gist.filename}
-        </p>,
-      );
+    for (const key in gistObject) {
+      if (gistObject.hasOwnProperty(key)) {
+        const gist = gistObject[key]
+        gistElements.push(
+          <p key={key}>
+            <FaRegFileAlt size="20" /> {gist.filename}
+          </p>
+        )
+      }
     }
-
-    return gistElements;
-  };
+    return gistElements
+  }
 
   return (
     <div className="user-list">
+      {/* not found page */}
       {isError && !isLoading ? <NotFound /> : null}
+      {/* loader */}
       {isLoading && !isError ? <Loader /> : null}
+
+      {/* rendering list if only both error and loading is cleared */}
       {!isError && !isLoading
         ? gistUsers?.map((val, index) => {
             return (
@@ -110,11 +126,11 @@ const GistList = ({
                   {renderGistProperties(val?.files)}
                 </div>
               </div>
-            );
+            )
           })
         : null}
     </div>
-  );
-};
+  )
+}
 
-export default GistList;
+export default GistList

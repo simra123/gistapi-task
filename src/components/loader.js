@@ -1,20 +1,21 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
+//customise pure css loader
 const Loader = () => {
   return (
     <Spinner>
-      <div className="lds-dual-ring"></div>
+      <div className="gist-loader"></div>
     </Spinner>
-  );
-};
+  )
+}
 
 const Spinner = styled.div`
-  .lds-dual-ring {
+  .gist-loader {
     width: 80px;
     height: 80px;
     margin: 40px auto;
   }
-  .lds-dual-ring:after {
+  .gist-loader:after {
     content: " ";
     display: block;
     width: 64px;
@@ -23,9 +24,9 @@ const Spinner = styled.div`
     border-radius: 50%;
     border: 6px solid #2f81f7;
     border-color: #2f81f7 transparent #2f81f7 transparent;
-    animation: lds-dual-ring 1.2s linear infinite;
+    animation: gist-loader 1.2s linear infinite;
   }
-  @keyframes lds-dual-ring {
+  @keyframes gist-loader {
     0% {
       transform: rotate(0deg);
     }
@@ -33,6 +34,6 @@ const Spinner = styled.div`
       transform: rotate(360deg);
     }
   }
-`;
+`
 
-export default Loader;
+export default Loader
