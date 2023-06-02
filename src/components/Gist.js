@@ -1,19 +1,19 @@
-import React, { useState } from "react"
-import styled from "styled-components"
-import Octicon from "react-octicon"
-import Search from "./Search"
+import React, { useState } from "react";
+import styled from "styled-components";
+import Octicon from "react-octicon";
+import Search from "./Search";
 //gist user list
-import GistList from "./GistList"
+import GistList from "./GistList";
 
 function Gist() {
   //alllist data
-  const [gistUsers, setGistUsers] = useState([])
+  const [gistUsers, setGistUsers] = useState([]);
   //loading state
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   //input value
-  const [searchValue, setSearchValue] = useState("")
+  const [searchValue, setSearchValue] = useState("");
   //error handling
-  const [isError, setIsError] = useState(false)
+  const [isError, setIsError] = useState(false);
 
   //components using the pattern "lifting up the state" to user minimum state
   return (
@@ -23,6 +23,7 @@ function Gist() {
         <Search
           setIsLoading={setIsLoading}
           setSearchValue={setSearchValue}
+          searchValue={searchValue}
           setGistForUser={setGistUsers}
           setIsError={setIsError}
         />
@@ -37,7 +38,7 @@ function Gist() {
         setIsError={setIsError}
       />
     </>
-  )
+  );
 }
 
 const Wrapper = styled.div`
@@ -49,6 +50,6 @@ const Wrapper = styled.div`
   line-height: 1.5;
   display: flex;
   align-items: center;
-`
+`;
 
-export default Gist
+export default Gist;
